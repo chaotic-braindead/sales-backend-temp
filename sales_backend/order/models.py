@@ -36,8 +36,8 @@ class Orders(models.Model):
     order_type = models.TextField(choices=Type)
 
 
-class OrderItems(models.Model):
-    order_item_id = models.AutoField(primary_key=True)
-    order_id = models.ForeignKey(to=Orders, on_delete=models.CASCADE)
-    item_id = models.ForeignKey(to="misc.Product", on_delete=models.SET_NULL, null=True)
-    sales_costing_id = models
+# class OrderItems(models.Model):
+#     order_item_id = models.AutoField(primary_key=True)
+#     order_id = models.ForeignKey(to=Orders, on_delete=models.CASCADE)
+#     item_id = models.ForeignKey(to="misc.Product", on_delete=models.SET_NULL, null=True)
+#     sales_costing_id = models

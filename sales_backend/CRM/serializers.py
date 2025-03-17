@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from customer.serializers import CustomerSerializer
+from misc.serializers import EmployeeSerializer, BusinessPartnerMasterSerializer
 
 
 class CampaignContactsSerializer(serializers.ModelSerializer):
@@ -32,7 +34,7 @@ class CampaignsSerializer(serializers.ModelSerializer):
 
 
 class LeadsSerializer(serializers.ModelSerializer):
-    campaigns = CampaignsSerializer(many=True)
+    campaigns = CampaignContactsSerializer(many=True)
 
     class Meta:
         model = Leads
@@ -40,9 +42,23 @@ class LeadsSerializer(serializers.ModelSerializer):
 
 
 class OpportunitiesSerializer(serializers.ModelSerializer):
+    customer_id = CustomerSerializer()
+    salesrep_id = EmployeeSerializer()
+    partner_id = BusinessPartnerMasterSerializer()
+
     class Meta:
         model = Opportunities
         fields = "__all__"
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        customer = data.pop("customer_id")
+        salesrep = data.pop("salesrep_id")
+        partner = data.pop("partner_id")
+        data["customer"] = customer
+        data["salesrep"] = salesrep
+        data["partner"] = partner
+        return data
 
 
 class TicketConvoSerializer(serializers.ModelSerializer):

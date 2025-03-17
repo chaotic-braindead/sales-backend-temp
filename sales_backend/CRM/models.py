@@ -33,11 +33,17 @@ class Campaigns(models.Model):
         REFERRAL = "Referral"
         ADVERTISEMENT = "Advertisement"
 
+    class Status(models.TextChoices):
+        PLANNED = "Planned"
+        ACTIVE = "Active"
+        COMPLETED = "Completed"
+
     campaign_id = models.AutoField(primary_key=True)
     campaign_name = models.CharField(max_length=255)
     type = models.TextField(choices=Type, default=Type.EMAIL)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    status = models.TextField(choices=Status, default=Status.ACTIVE)
 
 
 class CampaignContacts(models.Model):
@@ -46,12 +52,15 @@ class CampaignContacts(models.Model):
         NOT_INTERESTED = "Not Interested"
         PENDING = "Pending"
 
-    campcontact_id = models.CharField(max_length=255)
+    # id = primary key
     lead_id = models.ForeignKey(
         to=Leads, on_delete=models.SET_NULL, null=True, related_name="campaigns"
     )
     campaign_id = models.ForeignKey(
         to=Campaigns, on_delete=models.SET_NULL, null=True, related_name="contacts"
+    )
+    response_status = models.TextField(
+        choices=ResponseStatus, default=ResponseStatus.PENDING
     )
 
 

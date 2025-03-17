@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Employee(models.Model):
     employee_id = models.BigAutoField(primary_key=True)
     first_name = models.TextField(max_length=255)

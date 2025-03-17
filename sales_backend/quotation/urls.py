@@ -1,5 +1,5 @@
-from django.urls import path, include
-import views
+from django.urls import path
+from . import views
 
 urlpatterns = [
     path("", views.ListCreateQuotation.as_view()),

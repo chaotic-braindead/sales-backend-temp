@@ -40,3 +40,15 @@ class GeneralLedgerAccounts(models.Model):
 class BusinessPartnerMaster(models.Model):
     partner_id = models.AutoField(primary_key=True)
     partner_name = models.CharField(max_length=255)
+
+
+class ReworkOrder(models.Model):
+    rework_id = models.AutoField(primary_key=True)
+    rework_status = models.TextField()
+    rework_date = models.DateField()
+    expected_completion = models.DateField()
+
+
+class GoodsIssue(models.Model):
+    goods_issue_id = models.AutoField(primary_key=True)
+    issue_date = models.DateField()

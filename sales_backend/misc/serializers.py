@@ -36,3 +36,15 @@ class BusinessPartnerMasterSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessPartnerMaster
         fields = "__all__"
+
+
+class ReworkOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReworkOrder
+        fields = "__all__"
+
+
+class GoodsIssueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GoodsIssue
+        fields = "__all__"

@@ -30,3 +30,13 @@ class GeneralLedgerAccountsViewSet(viewsets.ModelViewSet):
 class BusinessPartnerMasterViewSet(viewsets.ModelViewSet):
     queryset = BusinessPartnerMaster.objects.all()
     serializer_class = BusinessPartnerMasterSerializer
+
+
+class ReworkOrderViewSet(viewsets.ModelViewSet):
+    queryset = ReworkOrder.objects.all()
+    serializer_class = ReworkOrderSerializer
+
+
+class GoodsIssueViewSet(viewsets.ModelViewSet):
+    queryset = GoodsIssue.objects.all()
+    serializer_class = GoodsIssueSerializer

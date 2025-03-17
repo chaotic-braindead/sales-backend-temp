@@ -34,7 +34,6 @@ class QuotationSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        print(validated_data)
         items_data = validated_data.pop("items")
 
         quotation = Quotation.objects.create(**validated_data)

@@ -18,3 +18,15 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = "__all__"
+
+
+class ChartOfAccountsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChartOfAccounts
+        fields = "__all__"
+
+
+class GeneralLedgerAccountsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GeneralLedgerAccounts
+        fields = "__all__"

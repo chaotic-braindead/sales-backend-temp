@@ -33,3 +33,25 @@ class ListCreateProduct(generics.ListCreateAPIView):
 class RetrieveDestroyProduct(generics.RetrieveDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class ListCreateChartOfAccounts(generics.ListCreateAPIView):
+    queryset = ChartOfAccounts.objects.all()
+    serializer_class = ChartOfAccountsSerializer
+    model = serializer_class.Meta.model
+
+
+class RetrieveDestroyChartOfAccounts(generics.RetrieveDestroyAPIView):
+    queryset = ChartOfAccounts.objects.all()
+    serializer_class = ChartOfAccountsSerializer
+
+
+class ListCreateGeneralLedgerAccounts(generics.ListCreateAPIView):
+    queryset = GeneralLedgerAccounts.objects.all()
+    serializer_class = GeneralLedgerAccountsSerializer
+    model = serializer_class.Meta.model
+
+
+class RetrieveDestroyGeneralLedgerAccounts(generics.RetrieveDestroyAPIView):
+    queryset = GeneralLedgerAccounts.objects.all()
+    serializer_class = GeneralLedgerAccountsSerializer

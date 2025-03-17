@@ -15,15 +15,16 @@ class Customer(models.Model):
 
     customer_id = models.BigAutoField(primary_key=True)
     gl_account_id = models.ForeignKey(
-        to="misc.GeneralLedgerAccounts", on_delete=models.SET_NULL
+        to="misc.GeneralLedgerAccounts", on_delete=models.CASCADE
     )
-    email_address = models.TextField(max_length=255, unique=True)
-    phone_number = models.TextField(max_length=20)
+    name = models.CharField(max_length=255, default="")
+    email_address = models.CharField(max_length=255, unique=True)
+    phone_number = models.CharField(max_length=20)
     address_line1 = models.TextField(max_length=255)
-    address_line2 = models.TextField(max_length=255)
-    city = models.TextField(max_length=100)
-    postal_code = models.TextField(max_length=20)
-    country = models.TextField(max_length=100)
+    address_line2 = models.TextField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=100)
     customer_type = models.TextField(choices=Type)
     status = models.TextField(choices=Status)
     debt = models.DecimalField(max_digits=10, decimal_places=2, default=0)

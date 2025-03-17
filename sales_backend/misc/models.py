@@ -23,3 +23,14 @@ class Product(models.Model):
     description = models.TextField(max_length=255)
     unit_of_measure = models.TextField(max_length=255, default="kg")
     policy_id = models.ForeignKey(to=Policies, on_delete=models.CASCADE)
+
+
+class ChartOfAccounts(models.Model):
+    account_code = models.BigAutoField(primary_key=True)
+    account_name = models.TextField(max_length=255)
+
+
+class GeneralLedgerAccounts(models.Model):
+    gl_account_id = models.BigAutoField(primary_key=True)
+    account_name = models.TextField(max_length=255)
+    account_code = models.ForeignKey(to=ChartOfAccounts, on_delete=models.CASCADE)

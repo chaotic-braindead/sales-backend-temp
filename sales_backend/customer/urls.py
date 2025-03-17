@@ -1,4 +1,7 @@
-from django.urls import path, include
-import views
+from . import views
+from django.urls import path
 
-urlpatterns = []
+urlpatterns = [
+    path("", views.ListCreateCustomer.as_view()),
+    path("<int:pk>", views.RetrieveDestroyGeneralLedgerAccounts.as_view()),
+]

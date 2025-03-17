@@ -11,7 +11,7 @@ class ListCreateQuotation(generics.ListCreateAPIView):
     model = serializer_class.Meta.model
 
 
-class RetrieveDestroyQuotation(generics.RetrieveDestroyAPIView):
+class RetrieveUpdateDestroyQuotation(generics.RetrieveUpdateDestroyAPIView):
     queryset = Quotation.objects.all()
     serializer_class = QuotationSerializer
 

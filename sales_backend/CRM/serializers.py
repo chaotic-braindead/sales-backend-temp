@@ -1,13 +1,31 @@
 from rest_framework import serializers
 from .models import *
 from customer.serializers import CustomerSerializer
+
 from misc.serializers import EmployeeSerializer, BusinessPartnerMasterSerializer
 
 
+class LeadsSerializer(serializers.ModelSerializer):
+    # campaigns = CampaignContactsSerializer(many=True)
+
+    class Meta:
+        model = Leads
+        fields = "__all__"
+
+
 class CampaignContactsSerializer(serializers.ModelSerializer):
+    lead_id = LeadsSerializer(read_only=True)
+
     class Meta:
         model = CampaignContacts
         fields = "__all__"
+        read_only_fields = ["campaign_id"]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        lead = data.pop("lead_id")
+        data["lead"] = lead
+        return data
 
 
 class CampaignsSerializer(serializers.ModelSerializer):
@@ -23,22 +41,17 @@ class CampaignsSerializer(serializers.ModelSerializer):
         the creation of a campaign in a single API call
         """
         contacts_data = validated_data.pop("contacts")
+        print(contacts_data)
         campaign = Campaigns.objects.create(**validated_data)
         contacts = []
+
         for contact in contacts_data:
-            contacts.append(CampaignContacts(**contact))
+            data = {"campaign_id": campaign, **contact}
+            contacts.append(CampaignContacts(**data))
 
         CampaignContacts.objects.bulk_create(contacts)
 
         return campaign
-
-
-class LeadsSerializer(serializers.ModelSerializer):
-    campaigns = CampaignContactsSerializer(many=True)
-
-    class Meta:
-        model = Leads
-        fields = "__all__"
 
 
 class OpportunitiesSerializer(serializers.ModelSerializer):

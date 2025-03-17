@@ -19,7 +19,6 @@ class CampaignContactsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CampaignContacts
         fields = "__all__"
-        read_only_fields = ["campaign_id"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -29,29 +28,11 @@ class CampaignContactsSerializer(serializers.ModelSerializer):
 
 
 class CampaignsSerializer(serializers.ModelSerializer):
-    contacts = CampaignContactsSerializer(many=True)
+    contacts = CampaignContactsSerializer(many=True, read_only=True)
 
     class Meta:
         model = Campaigns
         fields = "__all__"
-
-    def create(self, validated_data):
-        """
-        add logic on adding all campaign contacts together with
-        the creation of a campaign in a single API call
-        """
-        contacts_data = validated_data.pop("contacts")
-        print(contacts_data)
-        campaign = Campaigns.objects.create(**validated_data)
-        contacts = []
-
-        for contact in contacts_data:
-            data = {"campaign_id": campaign, **contact}
-            contacts.append(CampaignContacts(**data))
-
-        CampaignContacts.objects.bulk_create(contacts)
-
-        return campaign
 
 
 class OpportunitiesSerializer(serializers.ModelSerializer):

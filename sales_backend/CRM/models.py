@@ -57,7 +57,7 @@ class CampaignContacts(models.Model):
         to=Leads, on_delete=models.SET_NULL, null=True, related_name="campaigns"
     )
     campaign_id = models.ForeignKey(
-        to=Campaigns, on_delete=models.SET_NULL, null=True, related_name="contacts"
+        to=Campaigns, on_delete=models.CASCADE, related_name="contacts"
     )
     response_status = models.TextField(
         choices=ResponseStatus, default=ResponseStatus.PENDING

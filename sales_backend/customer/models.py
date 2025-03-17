@@ -15,7 +15,7 @@ class Customer(models.Model):
 
     customer_id = models.BigAutoField(primary_key=True)
     gl_account_id = models.ForeignKey(
-        to="misc.GeneralLedgerAccounts", on_delete=models.CASCADE
+        to="misc.GeneralLedgerAccounts", on_delete=models.SET_NULL, null=True
     )
     name = models.CharField(max_length=255, default="")
     email_address = models.CharField(max_length=255, unique=True)

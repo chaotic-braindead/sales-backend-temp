@@ -55,3 +55,14 @@ class ListCreateGeneralLedgerAccounts(generics.ListCreateAPIView):
 class RetrieveDestroyGeneralLedgerAccounts(generics.RetrieveDestroyAPIView):
     queryset = GeneralLedgerAccounts.objects.all()
     serializer_class = GeneralLedgerAccountsSerializer
+
+
+class ListCreateBusinessPartnerMaster(generics.ListCreateAPIView):
+    queryset = BusinessPartnerMaster.objects.all()
+    serializer_class = BusinessPartnerMasterSerializer
+    model = serializer_class.Meta.model
+
+
+class RetrieveDestroyBusinessPartnerMaster(generics.RetrieveDestroyAPIView):
+    queryset = BusinessPartnerMaster.objects.all()
+    serializer_class = BusinessPartnerMasterSerializer

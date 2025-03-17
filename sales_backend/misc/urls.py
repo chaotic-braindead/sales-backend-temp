@@ -15,4 +15,9 @@ urlpatterns = [
         "general-ledger-accounts/<int:pk>/",
         views.RetrieveDestroyGeneralLedgerAccounts.as_view(),
     ),
+    path("business-partner-master/", views.ListCreateBusinessPartnerMaster.as_view()),
+    path(
+        "business-partner-master/<int:pk>/",
+        views.RetrieveDestroyBusinessPartnerMaster.as_view(),
+    ),
 ]

@@ -35,3 +35,8 @@ class GeneralLedgerAccounts(models.Model):
     gl_account_id = models.BigAutoField(primary_key=True)
     account_name = models.TextField(max_length=255)
     account_code = models.ForeignKey(to=ChartOfAccounts, on_delete=models.CASCADE)
+
+
+class BusinessPartnerMaster(models.Model):
+    partner_id = models.AutoField(primary_key=True)
+    partner_name = models.CharField(max_length=255)

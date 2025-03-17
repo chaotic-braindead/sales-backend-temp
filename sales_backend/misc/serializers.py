@@ -30,3 +30,9 @@ class GeneralLedgerAccountsSerializer(serializers.ModelSerializer):
     class Meta:
         model = GeneralLedgerAccounts
         fields = "__all__"
+
+
+class BusinessPartnerMasterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BusinessPartnerMaster
+        fields = "__all__"

@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path("employee/", views.ListCreateEmployee.as_view()),
-    path("employee/<int:pk>/", views.RetrieveDestroyEmployee()),
+    path("employee/<int:pk>/", views.RetrieveDestroyEmployee().as_view()),
     path("policies/", views.ListCreatePolicies.as_view()),
     path("policies/<int:pk>/", views.RetrieveDestroyPolicies.as_view()),
     path("product/", views.ListCreateProduct.as_view()),

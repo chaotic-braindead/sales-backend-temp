@@ -23,6 +23,7 @@ class Product(models.Model):
     description = models.TextField(max_length=255)
     unit_of_measure = models.TextField(max_length=255, default="kg")
     policy_id = models.ForeignKey(to=Policies, on_delete=models.CASCADE)
+    stock = models.IntegerField(default=10)
 
 
 class ChartOfAccounts(models.Model):

@@ -1,6 +1,8 @@
-# CREATE A QUOTATION (/api/sales/quotation/)
+# Quotation
 
-Perform a POST request to /api/sales/quotation/ with the sample format in the request body:
+## CREATE A QUOTATION (/api/sales/quotation/)
+
+Perform a POST request to /api/sales/quotation/. Provided below is a sample format for the request body:
 
 ```
 {

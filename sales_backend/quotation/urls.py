@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path("", views.ListCreateQuotation.as_view()),
-    path("<int:pk>/", views.RetrieveUpdateDestroyQuotation.as_view()),
-]
+router = DefaultRouter()
+router.register(r"", views.QuotationViewSet)
+
+urlpatterns = [path("", include(router.urls))]

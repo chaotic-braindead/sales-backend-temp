@@ -1,74 +1,32 @@
-from rest_framework import generics
+from rest_framework import viewsets
 from .serializers import *
 
 
-class ListCreateLeads(generics.ListCreateAPIView):
+class LeadsViewSet(viewsets.ModelViewSet):
     queryset = Leads.objects.all()
     serializer_class = LeadsSerializer
-    model = serializer_class.Meta.model
 
 
-class RetrieveDestroyLeads(generics.RetrieveDestroyAPIView):
-    queryset = Leads.objects.all()
-    serializer_class = LeadsSerializer
-    model = serializer_class.Meta.model
-
-
-class ListCreateCampaigns(generics.ListCreateAPIView):
+class CampaignsViewSet(viewsets.ModelViewSet):
     queryset = Campaigns.objects.all()
     serializer_class = CampaignsSerializer
-    model = serializer_class.Meta.model
 
 
-class RetrieveDestroyCampaigns(generics.RetrieveDestroyAPIView):
-    queryset = Campaigns.objects.all()
-    serializer_class = CampaignsSerializer
-    model = serializer_class.Meta.model
-
-
-class ListCreateCampaignContacts(generics.ListCreateAPIView):
+class CampaignContactsViewSet(viewsets.ModelViewSet):
     queryset = CampaignContacts.objects.all()
     serializer_class = CampaignContactsSerializer
-    model = serializer_class.Meta.model
 
 
-class RetrieveDestroyCampaignContacts(generics.RetrieveDestroyAPIView):
-    queryset = CampaignContacts.objects.all()
-    serializer_class = CampaignContactsSerializer
-    model = serializer_class.Meta.model
-
-
-class ListCreateOpportunities(generics.ListCreateAPIView):
+class OpportunitiesViewSet(viewsets.ModelViewSet):
     queryset = Opportunities.objects.all()
     serializer_class = OpportunitiesSerializer
-    model = serializer_class.Meta.model
 
 
-class RetrieveDestroyOpportunities(generics.RetrieveDestroyAPIView):
-    queryset = Opportunities.objects.all()
-    serializer_class = OpportunitiesSerializer
-    model = serializer_class.Meta.model
-
-
-class ListCreateTicket(generics.ListCreateAPIView):
+class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
-    model = serializer_class.Meta.model
 
 
-class RetrieveDestroyTicket(generics.RetrieveDestroyAPIView):
-    queryset = Ticket.objects.all()
-    serializer_class = TicketSerializer
-    model = serializer_class.Meta.model
-
-
-class ListCreateTicketConvo(generics.ListCreateAPIView):
+class TicketConvoViewSet(viewsets.ModelViewSet):
     queryset = TicketConvo.objects.all()
     serializer_class = TicketConvoSerializer
-    model = serializer_class.Meta.model
-
-
-class RetrieveDestroyTicketConvo(generics.RetrieveDestroyAPIView):
-    queryset = TicketConvo.objects.all()
-    serializer_class = TicketConvoSerializer
-    model = serializer_class.Meta.model

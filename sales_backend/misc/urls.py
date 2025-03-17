@@ -1,23 +1,13 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path("employee/", views.ListCreateEmployee.as_view()),
-    path("employee/<int:pk>/", views.RetrieveDestroyEmployee().as_view()),
-    path("policies/", views.ListCreatePolicies.as_view()),
-    path("policies/<int:pk>/", views.RetrieveDestroyPolicies.as_view()),
-    path("product/", views.ListCreateProduct.as_view()),
-    path("product/<int:pk>/", views.RetrieveDestroyProduct.as_view()),
-    path("chart-of-accounts/", views.ListCreateChartOfAccounts.as_view()),
-    path("chart-of-accounts/<int:pk>/", views.RetrieveDestroyChartOfAccounts.as_view()),
-    path("general-ledger-accounts/", views.ListCreateGeneralLedgerAccounts.as_view()),
-    path(
-        "general-ledger-accounts/<int:pk>/",
-        views.RetrieveDestroyGeneralLedgerAccounts.as_view(),
-    ),
-    path("business-partner-master/", views.ListCreateBusinessPartnerMaster.as_view()),
-    path(
-        "business-partner-master/<int:pk>/",
-        views.RetrieveDestroyBusinessPartnerMaster.as_view(),
-    ),
-]
+router = DefaultRouter()
+router.register(r"employee", views.EmployeeViewSet)
+router.register(r"policies", views.PoliciesViewSet)
+router.register(r"product", views.ProductViewSet)
+router.register(r"chart-of-accounts", views.ChartOfAccountsViewSet)
+router.register(r"general-ledger-accounts", views.GeneralLedgerAccountsViewSet)
+router.register(r"business-partner-master", views.BusinessPartnerMasterViewSet)
+
+urlpatterns = [path("", include(router.urls))]

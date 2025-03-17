@@ -1,13 +1,7 @@
-from rest_framework import generics
+from rest_framework import viewsets
 from .serializers import *
 
 
-class ListCreateCustomer(generics.ListCreateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
-    model = serializer_class.Meta.model
-
-
-class RetrieveDestroyGeneralLedgerAccounts(generics.RetrieveDestroyAPIView):
+class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer

@@ -1,15 +1,13 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path("campaigns/", views.ListCreateCampaigns.as_view()),
-    path("campaigns/<int:pk>", views.RetrieveDestroyCampaigns.as_view()),
-    path("leads/", views.ListCreateLeads.as_view()),
-    path("leads/<int:pk>", views.RetrieveDestroyLeads.as_view()),
-    path("opportunities/", views.ListCreateOpportunities.as_view()),
-    path("opportunities/<int:pk>", views.RetrieveDestroyOpportunities.as_view()),
-    path("ticket/", views.ListCreateTicket.as_view()),
-    path("ticket/<int:pk>", views.RetrieveDestroyTicket.as_view()),
-    path("ticket-convo/", views.ListCreateTicketConvo.as_view()),
-    path("ticket-convo/<int:pk>", views.RetrieveDestroyTicketConvo.as_view()),
-]
+router = DefaultRouter()
+router.register(r"campaigns", views.CampaignsViewSet)
+router.register(r"leads", views.LeadsViewSet)
+router.register(r"opportunities", views.OpportunitiesViewSet)
+router.register(r"ticket", views.TicketViewSet)
+router.register(r"ticket-convo", views.TicketConvoViewSet)
+
+
+urlpatterns = [path("", include(router.urls))]

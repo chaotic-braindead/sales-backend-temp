@@ -63,9 +63,6 @@ class BOMSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    # unit_price = NonProjectOrderPricing(many=True, read_only=True)
-    # bom = BOMSerializer(read_only=True)
-
     class Meta:
         model = Product
         fields = "__all__"

@@ -36,6 +36,8 @@ class GeneralLedgerAccounts(models.Model):
     gl_account_id = models.BigAutoField(primary_key=True)
     account_name = models.TextField(max_length=255)
     account_code = models.ForeignKey(to=ChartOfAccounts, on_delete=models.CASCADE)
+    debit = models.DecimalField(max_digits=10, decimal_places=2, default=5000)
+    credit = models.DecimalField(max_digits=10, decimal_places=2, default=20000)
 
 
 class BusinessPartnerMaster(models.Model):

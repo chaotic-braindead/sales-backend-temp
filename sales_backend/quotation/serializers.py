@@ -24,12 +24,6 @@ class QuotationSerializer(serializers.ModelSerializer):
         model = Quotation
         fields = "__all__"
 
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data["customer"] = data.pop("customer_id")
-        data["salesrep"] = data.pop("salesrep_id")
-        return data
-
     def create(self, validated_data):
         items_data = validated_data.pop("items")
 

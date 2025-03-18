@@ -1,13 +1,10 @@
 from rest_framework import serializers
 from .models import *
-from misc.serializers import ProductSerializer, EmployeeSerializer
-from customer.serializers import CustomerSerializer
 from decimal import Decimal
+from misc.serializers import ProductSerializer, Product
 
 
 class QuotationItemsSerializer(serializers.ModelSerializer):
-    product_id = ProductSerializer()
-
     class Meta:
         model = QuotationItems
         fields = "__all__"
@@ -15,14 +12,13 @@ class QuotationItemsSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["product"] = data.pop("product_id")
+        product_id = data.pop("product_id")
+        data["product"] = ProductSerializer(Product.objects.get(pk=product_id)).data
         return data
 
 
 class QuotationSerializer(serializers.ModelSerializer):
     items = QuotationItemsSerializer(many=True)
-    customer_id = CustomerSerializer()
-    salesrep_id = EmployeeSerializer()
 
     class Meta:
         model = Quotation
@@ -41,8 +37,9 @@ class QuotationSerializer(serializers.ModelSerializer):
         quotation_items = []
         total_amount = Decimal(0)
         for item in items_data:
-            data = {**item, "quotation_id": quotation}
-            quotation_items.append(QuotationItems(**data))
+            item["quotation_id"] = quotation
+            item["total_price"] = item["quantity"] * item["unit_price"]
+            quotation_items.append(QuotationItems(**item))
             total_amount += item["quantity"] * item["unit_price"]
 
         QuotationItems.objects.bulk_create(quotation_items)

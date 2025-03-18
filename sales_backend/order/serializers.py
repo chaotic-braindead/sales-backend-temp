@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import *
-from decimal import Decimal
 from misc.serializers import (
     ProductSerializer,
     GoodsIssueSerializer,
@@ -9,7 +8,7 @@ from misc.serializers import (
 )
 from costing.serializers import SalesCostingSerializer
 from customer.serializers import CustomerSerializer
-from quotation.serializers import QuotationSerializer, Quotation
+from invoice.serializers import SalesInvoicesSerializer
 
 
 class OrderItemsSerializer(serializers.ModelSerializer):
@@ -50,4 +49,7 @@ class OrdersSerializer(serializers.ModelSerializer):
         data["customer"] = customer
         salesrep = data.pop("salesrep_id")
         data["salesrep"] = salesrep
+
+        invoice = instance.invoice.first()
+        data["invoice"] = SalesInvoicesSerializer(invoice).data if invoice else None
         return data

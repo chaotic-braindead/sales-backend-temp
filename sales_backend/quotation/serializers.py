@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from .models import *
-from misc.serializers import ProductSerializer, Product
-from customer.serializers import Customer, CustomerSerializer
+from misc.serializers import ProductSerializer, EmployeeSerializer
+from customer.serializers import CustomerSerializer
 from decimal import Decimal
 
 
 class QuotationItemsSerializer(serializers.ModelSerializer):
+    product_id = ProductSerializer()
+
     class Meta:
         model = QuotationItems
         fields = "__all__"
@@ -13,14 +15,14 @@ class QuotationItemsSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        product_id = data.pop("product_id")
-        product_data = ProductSerializer(Product.objects.get(pk=product_id)).data
-        data = {**data, **product_data}
+        data["product"] = data.pop("product_id")
         return data
 
 
 class QuotationSerializer(serializers.ModelSerializer):
     items = QuotationItemsSerializer(many=True)
+    customer_id = CustomerSerializer()
+    salesrep_id = EmployeeSerializer()
 
     class Meta:
         model = Quotation
@@ -28,9 +30,8 @@ class QuotationSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        customer_id = data.pop("customer_id")
-        customer = Customer.objects.get(customer_id=customer_id)
-        data["customer"] = CustomerSerializer(customer).data
+        data["customer"] = data.pop("customer_id")
+        data["salesrep"] = data.pop("salesrep_id")
         return data
 
     def create(self, validated_data):

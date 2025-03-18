@@ -6,11 +6,16 @@ from misc.serializers import EmployeeSerializer, BusinessPartnerMasterSerializer
 
 
 class LeadsSerializer(serializers.ModelSerializer):
-    # campaigns = CampaignContactsSerializer(many=True)
+    salesrep_id = EmployeeSerializer()
 
     class Meta:
         model = Leads
         fields = "__all__"
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["salesrep"] = data.pop("salesrep_id")
+        return data
 
 
 class CampaignContactsSerializer(serializers.ModelSerializer):

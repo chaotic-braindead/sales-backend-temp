@@ -41,14 +41,10 @@ class OrdersSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        goods_issue = data.pop("goods_issue_id")
-        data["goods_issue"] = goods_issue
-        rework = data.pop("rework_id")
-        data["rework"] = rework
-        customer = data.pop("customer_id")
-        data["customer"] = customer
-        salesrep = data.pop("salesrep_id")
-        data["salesrep"] = salesrep
+        data["goods_issue"] = data.pop("goods_issue_id")
+        data["rework"] = data.pop("rework_id")
+        data["customer"] = data.pop("customer_id")
+        data["salesrep"] = data.pop("salesrep_id")
 
         invoice = instance.invoice.first()
         data["invoice"] = SalesInvoicesSerializer(invoice).data if invoice else None

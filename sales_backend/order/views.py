@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from .serializers import *
 from rest_framework.request import Request
-from quotation.serializers import QuotationItems
+from quotation.serializers import QuotationItems, Quotation
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework import status

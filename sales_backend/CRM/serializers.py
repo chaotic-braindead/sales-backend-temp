@@ -46,12 +46,9 @@ class OpportunitiesSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        customer = data.pop("customer_id")
-        salesrep = data.pop("salesrep_id")
-        partner = data.pop("partner_id")
-        data["customer"] = customer
-        data["salesrep"] = salesrep
-        data["partner"] = partner
+        data["customer"] = data.pop("customer_id")
+        data["salesrep"] = data.pop("salesrep_id")
+        data["partner"] = data.pop("partner_id")
         return data
 
 

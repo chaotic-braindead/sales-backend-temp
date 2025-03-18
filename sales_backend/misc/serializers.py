@@ -14,12 +14,6 @@ class PoliciesSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = "__all__"
-
-
 class ChartOfAccountsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChartOfAccounts
@@ -47,4 +41,31 @@ class ReworkOrderSerializer(serializers.ModelSerializer):
 class GoodsIssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = GoodsIssue
+        fields = "__all__"
+
+
+class NonProjectOrderPricingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NonProjectOrderPricing
+        fields = "__all__"
+
+
+class RawMaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RawMaterials
+        fields = "__all__"
+
+
+class BOMSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BOM
+        fields = "__all__"
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    # unit_price = NonProjectOrderPricing(many=True, read_only=True)
+    # bom = BOMSerializer(read_only=True)
+
+    class Meta:
+        model = Product
         fields = "__all__"

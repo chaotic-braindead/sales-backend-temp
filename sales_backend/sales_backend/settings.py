@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "agreement",
     "CRM",
+    "costing",
     "customer",
     "delivery",
     "dunning",

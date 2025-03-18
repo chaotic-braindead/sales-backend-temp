@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .serializers import *
 
-# Create your views here.
+
+class SalesCostingViewSet(viewsets.ModelViewSet):
+    queryset = SalesCosting.objects.all()
+    serializer_class = SalesCostingSerializer

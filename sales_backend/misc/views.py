@@ -40,3 +40,18 @@ class ReworkOrderViewSet(viewsets.ModelViewSet):
 class GoodsIssueViewSet(viewsets.ModelViewSet):
     queryset = GoodsIssue.objects.all()
     serializer_class = GoodsIssueSerializer
+
+
+class NonProjectOrderPricingViewSet(viewsets.ModelViewSet):
+    queryset = NonProjectOrderPricing.objects.all()
+    serializer_class = NonProjectOrderPricingSerializer
+
+
+class RawMaterialsViewSet(viewsets.ModelViewSet):
+    queryset = RawMaterials.objects.all()
+    serializer_class = RawMaterialSerializer
+
+
+class BOMViewSet(viewsets.ModelViewSet):
+    queryset = BOM.objects.all()
+    serializer_class = BOMSerializer

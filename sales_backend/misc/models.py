@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Employee(models.Model):
@@ -14,7 +15,7 @@ class Policies(models.Model):
     policy_id = models.BigAutoField(primary_key=True)
     policy_name = models.TextField(max_length=255)
     description = models.TextField(max_length=255)
-    effective_date = models.DateField(auto_now_add=True)
+    effective_date = models.DateTimeField(default=datetime.now())
 
 
 class Product(models.Model):
@@ -45,10 +46,10 @@ class BusinessPartnerMaster(models.Model):
 class ReworkOrder(models.Model):
     rework_id = models.AutoField(primary_key=True)
     rework_status = models.TextField()
-    rework_date = models.DateField()
-    expected_completion = models.DateField()
+    rework_date = models.DateTimeField(default=datetime.now())
+    expected_completion = models.DateTimeField(default=datetime.now())
 
 
 class GoodsIssue(models.Model):
     goods_issue_id = models.AutoField(primary_key=True)
-    issue_date = models.DateField()
+    issue_date = models.DateTimeField(default=datetime.now())

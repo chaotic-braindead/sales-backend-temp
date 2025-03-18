@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Orders(models.Model):
@@ -31,7 +32,7 @@ class Orders(models.Model):
     )
     rework_id = models.ForeignKey(to="misc.ReworkOrder", on_delete=models.CASCADE)
     goods_issue_id = models.ForeignKey(to="misc.GoodsIssue", on_delete=models.CASCADE)
-    order_date = models.DateTimeField()
+    order_date = models.DateTimeField(default=datetime.now())
     order_status = models.TextField(choices=Status)
     order_type = models.TextField(choices=Type)
 

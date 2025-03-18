@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Quotation(models.Model):
@@ -19,7 +20,7 @@ class Quotation(models.Model):
     salesrep_id = models.ForeignKey(
         to="misc.Employee", on_delete=models.SET_NULL, null=True
     )
-    date_issued = models.DateTimeField(auto_now_add=True)
+    date_issued = models.DateTimeField(default=datetime.now())
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     type = models.TextField(choices=Type)
     status = models.TextField(choices=Status, default=Status.PENDING)

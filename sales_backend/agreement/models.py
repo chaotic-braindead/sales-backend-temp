@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class BlanketAgreement(models.Model):
@@ -15,12 +16,12 @@ class BlanketAgreement(models.Model):
     agreement_id = models.AutoField(primary_key=True)
     customer_id = models.ForeignKey(to="customer.Customer", on_delete=models.CASCADE)
     salesrep_id = models.ForeignKey(to="misc.Employee", on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateTimeField(default=datetime.now())
+    end_date = models.DateTimeField(default=datetime.now())
     total_value = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.TextField(choices=Status)
     description = models.CharField(max_length=255)
-    signed_date = models.DateField()
+    signed_date = models.DateTimeField(default=datetime.now())
     agreement_method = models.TextField(choices=AgreementMethod)
 
 

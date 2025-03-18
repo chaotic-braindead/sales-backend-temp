@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Leads(models.Model):
@@ -41,8 +42,8 @@ class Campaigns(models.Model):
     campaign_id = models.AutoField(primary_key=True)
     campaign_name = models.CharField(max_length=255)
     type = models.TextField(choices=Type, default=Type.EMAIL)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateTimeField(default=datetime.now())
+    end_date = models.DateTimeField(default=datetime.now())
     status = models.TextField(choices=Status, default=Status.ACTIVE)
 
 
@@ -86,12 +87,12 @@ class Opportunities(models.Model):
         to="misc.Employee", on_delete=models.SET_NULL, null=True
     )
     estimated_value = models.DecimalField(max_digits=10, decimal_places=2)
-    expected_closed_date = models.DateField()
+    expected_closed_date = models.DateTimeField(default=datetime.now())
     stage = models.TextField(choices=Stage)
     status = models.TextField(choices=Status)
-    description = models.TextField()
-    reason_lost = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True, null=True)
+    reason_lost = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(default=datetime.now())
 
 
 class Ticket(models.Model):
@@ -115,7 +116,7 @@ class Ticket(models.Model):
     description = models.TextField()
     status = models.TextField(choices=Status)
     priority = models.TextField(choices=Priority)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=datetime.now())
 
 
 class TicketConvo(models.Model):
@@ -124,4 +125,4 @@ class TicketConvo(models.Model):
         to=Ticket, on_delete=models.CASCADE, related_name="conversations"
     )
     content = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=datetime.now())

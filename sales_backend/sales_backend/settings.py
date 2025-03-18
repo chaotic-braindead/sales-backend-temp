@@ -104,12 +104,12 @@ WSGI_APPLICATION = "sales_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "kinetiq",
-        "USER": "root",
-        "PASSWORD": "",
+        "USER": "postgres",
+        "PASSWORD": "123",
         "HOST": "localhost",
-        "PORT": 3306,
+        "PORT": 5432,
     }
 }
 
